@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>mui 5</title>
+	 <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable
+=no">
+	<link href="public/library/bootstrap.min.css" type="text/css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="public/library/mui/css/mui.min.css">
+    <script src="public/library/jquery.min.js"></script>
+
+	<style>
+		.mui-bar{ background-color: #f9ff0b;}
+	</style>
+</head>
+<html>
+<body class="mui-fullscreen">
+
+	<!-- 侧滑导航根容器 -->
+	<div class="mui-off-canvas-wrap mui-draggable" style="height: 50px;">
+		<!-- 菜单容器 -->
+		<aside class="mui-off-canvas-left" id="offCanvasWrapper">
+			<div class="mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<!-- 菜单具体展示内容 -->
+					<ul class="mui-table-view mui-table-view-chevron mui-table-view-inverted">
+							<li class="mui-table-view-cell">
+								<a href="mui.html" class="mui-navigate-right">
+									
+								</a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a href="cate.html" class="mui-navigate-right">
+									分类
+								</a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a class="mui-navigate-right">
+									Item 3
+								</a>
+							</li>
+						 
+						</ul>
+				</div>
+			</div>
+		</aside>
+
+		<div class="mui-inner-wrap mui-transitioning">
+			<!-- 主页面标题 -->
+			<header class="mui-bar mui-bar-nav">
+				<a class="mui-icon mui-action-menu mui-icon-bars mui-pull-left" href="#offCanvasWrapper"></a>
+				<h1 class="mui-title">{$manga_info['manga_name']}</h1>
+			</header>
+		</div>
+
+	</div>
+	<div style="text-align:center;margin-top:10px;width: auto;overflow: hidden;" class="img-responsive">{$manga_info.manga_content}</div>
+
+	<script type="text/javascript" src="public/library/mui/js/mui.min.js"></script>
+
+	<script>
+			mui.init();
+		 
+			 
+			 //主界面和侧滑菜单界面均支持区域滚动；
+			 
+			mui('#offCanvasContentScroll').scroll();
+		 
+		</script>
+
+</body>
+</html>

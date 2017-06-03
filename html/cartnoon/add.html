@@ -1,0 +1,25 @@
+{include "public/header.html"}
+	<div class="container" style="width:700px">
+		<!-- action不可以直接传参数  multipart -->
+		<form action="index.php" enctype="multipart/form-data" method="post">
+
+			<div class="form-group">
+				<label >漫画名称：</label>
+				<input type="text" class="form-control" name="comics_name"></div>
+			<div class="form-group">
+				<label >简介：</label>
+				<textarea  id="" style="width: 667px;
+    height: 313px;border-radius:7px;" name="comics_brief"></textarea>
+			</div>
+			<div class="form-group">
+				<label >图片:</label>
+				<input type="file"  name="comics_icon"></div>
+			<div class="form-group">
+
+				<input type="hidden" name="controler" value="cartnoon">
+				<input type="hidden" name="action" value="save">
+				<input type="submit"  class="btn btn-info" value="保存信息"></div>
+		</form>
+	</div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!-- smarty怎么进行文件的引入 -->
+{include "public/header.html"}
+<div class="container">
+
+	<h3>分类列表</h3>
+	<a href="index.php?controler=category&action=add" class="btn btn-success">添加分类</a>
+
+	<table class="table">
+		<tr>
+			<th>ID</th>
+			<th>分类名称</th>
+			<th>操作</th> 
+		</tr>
+		{foreach $category_list $value}
+		<tr>
+			<td>{$value['ID']}</td>
+			<td>{$value['cate_name']}</td>
+			 
+			<td>
+				<!-- 暂时不写预览 -->
+				<!-- <a href='index.php?controler=category&action=preview&id={$value["ID"]}' class='btn btn-success'>预览</a> -->
+				<a href='index.php?controler=category&action=edit&id={$value["ID"]}' class='btn btn-success'>编辑</a>
+				<a href='index.php?controler=category&action=update&id={$value["ID"]}' class='btn btn-info'>更新</a>
+				<a href='index.php?controler=category&action=collect&id={$value["ID"]}' class='btn btn-danger'>采集</a>		 
+				<a href='index.php?controler=category&action=delete&id={$value["ID"]}' class='btn btn-danger'>删除</a>
+			</td>
+		</tr>
+		{/foreach}
+	</table>
+</div>
+
+</body>
+</html>

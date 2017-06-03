@@ -1,0 +1,46 @@
+ {include "public/header.html"} 
+
+
+
+
+<div class="container">
+
+	<h3>《 {$cartnoon_info['comics_name']} 》动漫信息详细列表</h3>
+
+	<a href="index.php?controler=cartnoon&action=index" class="btn btn-info">返回</a>&nbsp;
+	
+	<a href="index.php?controler=manga&action=add&cartnoon_id={$cartnoon_info['ID']}" class="btn btn-info">添加信息</a>	
+
+</div>
+<div class="container">
+	<table class="table">
+	<tr class="row">
+		<th class="col-lg-2">ID</th>
+		<th class="col-lg-4">动漫</th>
+		<th class="col-lg-3">图片</th>
+		<th class="col-lg-3">操作</th>
+	</tr>
+
+	<!-- if(isset($manga_list){ }   为了防止在没有数据时候报错-->
+	
+	{foreach $manga_list $value}
+		<tr class="row">
+			<td class="col-lg-2">{$value['ID']}</td>
+			<td class="col-lg-4">{$value['manga_name']}</td>
+			<td class="col-lg-3"><img src="{$value['comics_icon']}" style=" width: 60px;"></td>
+			<td class="col-lg-3">
+				<a target='_blank' href='index.php?controler=manga&action=preview&ID={$value['ID']}' class='btn btn-success'>预览</a>
+			<a href='index.php?controler=manga&action=delete&ID={$value['ID']}' class='btn btn-danger'>删除</a>
+			
+			</td>
+		</tr>		
+				
+	{/foreach}
+
+
+</table>
+
+</div>
+
+</body>
+</html>

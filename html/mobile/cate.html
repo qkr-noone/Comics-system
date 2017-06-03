@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>mobile</title>
+	 <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable
+=no">
+	<link rel="stylesheet" type="text/css" href="public/library/mui/css/mui.min.css">
+	<link href="public/library/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <script src="public/library/jquery.min.js"></script>
+	<style>.mui-bar{ background-color: #f9ff0b }
+
+
+			.mui-control-content {
+				background-color: white;
+				min-height: 215px;
+			}
+			.mui-control-content .mui-loading {
+				margin-top: 50px;
+			}
+		
+	</style>
+</head>
+<body >
+
+	<header class="mui-bar mui-bar-nav">
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		<h1 class="mui-title">漫画列表</h1>
+	</header>
+	<div class="mui-content">
+		<div id="slider" class="mui-slider" >
+			<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+			{foreach $cate_list as $key=>$cate_item}
+
+			{if $key==0}
+				<a class="mui-control-item mui-active" href="#item{$key}}">{$cate_item.cate_name}</a>
+			{else}
+				<a class="mui-control-item" href="#item{$key}}">{$cate_item.cate_name}</a>
+			{/if}
+
+			{/foreach}
+				
+			</div>
+
+			<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-{$col_num}" ></div>
+			<div class="mui-slider-group" >
+			{foreach $cate_list as $key=>$cate_itme}
+			 
+				<div id="item{$key}" class="mui-slider-item mui-control-content ">
+					<div id="scroll{$key}" class="mui-scroll-wrapper" >
+						<div class="mui-scroll" >
+							<ul class="mui-table-view">
+								<li class="mui-table-view-cell">第{$key}个选项卡子项-1</li>
+								 
+							</ul>
+						</div>
+						<div class="mui-scrollbar mui-scrollbar-vertical">
+							<div class="mui-scrollbar-indicator" ></div>
+						</div>
+					</div>
+				</div>
+			 {/foreach} 
+			
+		</div>
+	</div>
+
+
+	<script type="text/javascript" src="public/library/mui/js/mui.min.js"></script>
+
+	<script>
+			mui.init({
+				swipeBack: false
+			});
+			(function($) {
+				$('.mui-scroll-wrapper').scroll({
+					indicators: true //是否显示滚动条
+				});
+		
+				var sliderSegmentedControl = document.getElementById('sliderSegmentedControl');
+				$('.mui-input-group').on('change', 'input', function() {
+					if (this.checked) {
+						sliderSegmentedControl.className = 'mui-slider-indicator mui-segmented-control mui-segmented-control-inverted mui-segmented-control-' + this.value;
+						//force repaint
+						sliderProgressBar.setAttribute('style', sliderProgressBar.getAttribute('style'));
+					}
+				});
+			})(mui);
+		</script>
+</body>
+</html>

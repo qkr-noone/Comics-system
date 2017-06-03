@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta chareset="utf-8">
+	<title>漫画管理系统</title>
+	<link rel="stylesheet" type="text/css" href="public/library/mui/css/mui.min.css">
+	<link href="public/library/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <script src="public/library/jquery.min.js"></script>
+    <style>
+    	.mui-bar{ background-color: #f9ff0b;}
+    	.container .row div .menu_box li a,.container .row div .login_box li a{
+    		display:block;
+    		padding:0px 20px; 
+    		color:white;
+    	}
+    	.container .row div .menu_box li a:hover{
+    		text-decoration: none;
+    	}
+    	ul{ padding:0px;margin: 0px; }
+   		li{list-style: none;}
+   		.manga_list { margin-top: 30px;}
+   		.manga_list ul{height: auto;}
+   		.manga_list ul li{display: block;width: 100%;height: auto;overflow:hidden;margin-bottom: 20px;}
+   		.manga_list ul li div{display: inline-block;}
+   		.manga_list ul li div a img{width: 40%;}
+	</style>
+</head>
+<body>
+	<<header class="mui-bar mui-bar-nav">
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		<h1 class="mui-title">漫画列表</h1>
+	</header>
+
+	<div class="container">
+	<section>
+		<div class="row">
+			<div class="col-lg-6 ">
+			<!-- class="img-responsive" 自适应  cente-block水平居中 -->
+				<img src="{$cartnoon_info.comics_icon}" class="img-responsive center-block"
+				style="width: 60%;margin-top: 20px;">
+			</div>
+			<div class="col-lg-6" style="width: 40%;display: inline-block;">
+				<h3>{ $cartnoon_info.comics_name}</h3>
+				<div>{$cartnoon_info.comics_brief}</div>
+			</div>
+		</div>
+	</section>
+
+
+	<section>
+			<div class="row manga_list">
+				<ul style="height: auto;">
+					{foreach $manga_list $value}
+					<li style="height: auto;">
+						<div class="col-lg-4 center-block">
+							<a href="index.php?controler=manga&action=preview&ID={$value['ID']}">
+							<img class="img-responsive center-block" src="{$value['comics_icon']}" alt=""></a>
+						</div>
+						<div class="col-lg-4 center-block">{$value['manga_name']}</div>
+						<!-- <div class="col-lg-3">{$value['create_time']}</div> -->
+						<div class="col-lg-4 center-block">{date("m-d",$value['create_time'])}</div>
+					</li>
+					
+					{/foreach}
+				</ul>
+			</div>
+		</section>		
+</div>
+</body>
+</html>

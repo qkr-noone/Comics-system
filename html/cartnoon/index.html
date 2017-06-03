@@ -1,0 +1,55 @@
+{include "public/header.html"}
+
+
+<div class="container">
+	<h3>漫画信息展示</h3>
+	<a href="index.php?controler=cartnoon&action=add" class="btn btn-success"> 添加信息</a>
+	<a href="index.php?controler=category&action=index" class="btn btn-success"> 分类管理</a>
+
+	<ul class="cate_list">
+		<li>
+			<a href="index.php?controler=cartnoon&action=index">全部</a>
+		</li>
+		<!-- 遍历 显示在 html 中 得到 cate_name -->
+		{foreach $category_list $value}
+		<li>
+			<a href="index.php?controler=cartnoon&action=index&tag={$value.ID}">{$value['cate_name']}</a>
+		</li>
+		{/foreach}
+	</ul>
+</div>
+<style>
+	
+</style>
+<div class="container">
+	<table class="table">
+	<tr class="row">
+		<th class="col-lg-1">ID</th>
+		<th class="col-lg-2">动漫</th>
+		<th class="col-lg-1">图片</th>
+		<th class="col-lg-4">简介</th>
+		<th class="col-lg-4">操作</th>
+	</tr>
+
+	{foreach $cartnoon_list $value}
+
+		<tr class="row">
+			<td class="col-lg-1">{$value['ID']}</td>
+			<td class="col-lg-2">{$value['comics_name']}</td>
+			<td class="col-lg-1"><img src="{$value['comics_icon']}" style='width:60px'></td>
+			<td class="col-lg-4 ellipsis">{$value['comics_brief']}</td>
+			<td class="col-lg-4">
+			<a href='index.php?controler=cartnoon&action=preview&ID={$value["ID"]}' class='btn 	btn-success'>预览</a>
+			<a href='index.php?controler=manga&action=index&id={$value["ID"]}' class='btn 	btn-success'>查看</a>
+			<a href='index.php?controler=cartnoon&action=collect&id={$value["ID"]}' class='btn 	btn-danger'>采集</a>
+			<a href='index.php?controler=cartnoon&action=delete&id={$value["ID"]}' class='btn btn-danger'>删除</a>
+			</td>
+		</tr>
+	{/foreach}
+</table>
+	
+</div>
+
+
+</body>
+</html>

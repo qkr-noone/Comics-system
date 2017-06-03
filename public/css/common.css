@@ -1,0 +1,11 @@
+header{    background-color: #333; height: 58px;margin-bottom: 10px;}
+
+.menu_box li,.login_box li{float: left;height: 58px; line-height: 58px;}
+.menu_box li a,.login_box li a{color: #fff;padding: 0 20px;font-size: 18px}
+
+ul{margin: 0;padding: 0;}
+li{list-style: none;}
+table.table{margin-top: 20px;}
+
+.index_li_box{margin-top: 10px;}
+.index_li_box li{float: left; width: 22%; margin-right: 20px; text-align: center; margin-bottom: 20px;}

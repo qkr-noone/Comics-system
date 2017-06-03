@@ -1,0 +1,22 @@
+
+ {include "public/header.html"} 
+<style type="text/css">
+
+</style>
+ <div class="container">
+ 	<section class="home-index">
+ 		<ul>
+ 			{foreach $cartnoon_list $value}
+ 			<li >
+ 				<div>
+ 					<a href="index.php?controler=cartnoon&action=preview&ID={$value['ID']}">
+ 						<img src="{$value['comics_icon']}"  class="img-responsive"></a>
+ 				</div>
+ 				<h4>{$value['comics_name']}</h3>
+ 			</li>
+ 			{/foreach}
+ 		</ul>
+ 	</section>
+ </div>
+ </body>
+ </html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>mui 5</title>
+	 <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable
+=no">
+	<link rel="stylesheet" type="text/css" href="public/library/mui/css/mui.min.css">
+	<style>.mui-bar{ background-color: #f9ff0b }
+
+
+			.mui-control-content {
+				background-color: white;
+				min-height: 545px;
+			}
+			.mui-control-content .mui-loading {
+				margin-top: 50px;
+			}
+			.mui-segmented-control .mui-control-item {
+   				line-height: 38px;
+   				display: inline-block;
+   				width: 16%;
+   				float: left;
+   			}
+   			.mui-segmented-control.mui-segmented-control-inverted~.mui-slider-progress-bar {    background-color: transparent;}
+   			.mui-table-view-cell>a:not(.mui-btn) {  margin: -11px -10px; line-height: 50px;}
+   			.mui-navigate-right{padding-right: 50px}   
+
+	</style>
+</head>
+<body >
+
+	<header class="mui-bar mui-bar-nav">
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		<h1 class="mui-title">漫画列表</h1>
+	</header>
+	<div class="mui-content">
+		<div id="slider" class="mui-slider" >
+			<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+			{foreach $cate_list as $key=>$cate_itme}
+			{if $key == 0}
+
+				<a class="mui-control-item mui-active" href="#item{$key}">{$cate_itme.cate_name}</a>
+			{else}
+				<a class="mui-control-item " href="#item{$key}">{$cate_itme.cate_name}</a>
+			{/if}   
+			{/foreach} 
+
+				<!-- 动态化 -->
+			</div>
+	 
+		
+			<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-{$col_num}" ></div>
+
+
+			<div class="mui-slider-group" >
+			<!-- 爆笑 -->
+			<!-- 少年 -->
+			<!-- 遍历两次同一个模版变量的时候，它们的键和值，需和前一次的命名要不一样 -->
+			{foreach $cate_list as $key=>$cate_item}
+			 
+				<div id="item{$key}" class="mui-slider-item mui-control-content ">
+					<div id="scroll{$key}" class="mui-scroll-wrapper" >
+						<div class="mui-scroll" >
+							<ul class="mui-table-view mui-table-view-chevron"> 
+							 
+							</ul>
+						</div>
+						<div class="mui-scrollbar mui-scrollbar-vertical">
+							<div class="mui-scrollbar-indicator" ></div>
+						</div>
+					</div>
+				</div>
+			 {/foreach} 
+
+
+			</div>
+		</div>
+
+	 
+	</div>
+	<script type="text/javascript" src="public/library/jquery.min.js"></script>
+	<script type="text/javascript" src="public/library/mui/js/mui.min.js"></script>
+	<!-- 引入下拉加载更多的组件源码 -->
+	<script type="text/javascript" src="public/library/mui/js/mui.pullToRefresh.js"></script>
+
+	<script>
+			mui.init({
+				swipeBack: false
+			});
+			(function($) {
+				$('.mui-scroll-wrapper').scroll({
+					indicators: true //是否显示滚动条
+				});
+				
+
+				document.getElementById('slider').addEventListener('slide', function(e) {
+					if (e.detail.slideNumber === 1) {
+						if (item2.querySelector('.mui-loading')) {
+							setTimeout(function() {
+								item2.querySelector('.mui-scroll').innerHTML = html2;
+							}, 500);
+						}
+					} else if (e.detail.slideNumber === 2) {
+						if (item3.querySelector('.mui-loading')) {
+							setTimeout(function() {
+								item3.querySelector('.mui-scroll').innerHTML = html3;
+							}, 500);
+						}
+					}
+				});
+				
+				$.ready(function() {
+					//循环初始化所有下拉刷新，上拉加载。
+					$.each(document.querySelectorAll('.mui-slider-group .mui-scroll'), function(index, pullRefreshEl) {
+
+						$(pullRefreshEl).pullToRefresh({
+							down: { //下拉刷新
+								callback: function() {
+									var self = this;
+									setTimeout(function() {
+										var ul = self.element.querySelector('.mui-table-view');
+										ul.insertBefore(createFragment(ul, index, 10, true), ul.firstChild);
+										self.endPullDownToRefresh();
+									}, 1000);
+								}
+							},
+							up: { //上拉加载更多数据
+								callback: function() {
+									var self = this;
+									setTimeout(function() {
+										var ul = self.element.querySelector('.mui-table-view');
+										$.get("index.php?controler=mobile&action=get_ajax_data",{},function  (rtn_data) {
+							var cartnoon_list=JSON.parse(rtn_data);
+
+							 	var li_html="";
+												 	for (var i = 0; i < cartnoon_list.length; i++) {
+									 li_html+=` <li class="mui-table-view-cell mui-media">
+											<a class="mui-navigate-right" href="javascript:;">
+												<img class="mui-media-object mui-pull-left" src="${ cartnoon_list[i]['comics_icon']}">
+												<div class="mui-media-body">
+													${ cartnoon_list[i]['comics_name']}
+													<p class="mui-ellipsis">	${ cartnoon_list[i]['comics_brief']}</p>
+												</div>
+											</a>
+										</li>`;
+													}
+ 
+
+													jQuery(ul).append(li_html);
+													self.endPullUpToRefresh();
+
+						})
+										
+									}, 1000);
+								}
+							}
+						});
+					});
+
+					// createFragment 动态加载对应的分类数据
+					var createFragment = function(ul, index, count, reverse) {
+						var length = ul.querySelectorAll('li').length;
+						var fragment = document.createDocumentFragment();
+						var li;
+
+						// ajax请求后台，返回json字符串，转格式
+						
+						
+						
+					};
+				});
+
+			})(mui);
+		</script>
+</body>
+</html>

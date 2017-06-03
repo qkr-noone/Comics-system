@@ -1,0 +1,33 @@
+{include "public/header.html"}
+
+
+<div class="container">
+	<ul class="cate_list">
+		<li>
+			<a href="index.php?controler=category&action=lists">全部</a>
+		</li>
+		<!-- 遍历 显示在 html 中 得到 cate_name -->
+		{foreach $category_list $value}
+		<li>
+			<a href="index.php?controler=category&action=lists&tag={$value.ID}">{$value['cate_name']}</a>
+		</li>
+		{/foreach}
+	</ul>
+	
+	<section class="home-index">
+		
+		<ul>
+			{foreach $cartnoon_list $value}
+			<li>
+				<div>
+					<a href="index.php?controler=cartnoon&action=preview&ID={$value['ID']}">
+					<img src="{$value['comics_icon']}" class="img-responsive"></a>
+				</div>
+				<h3>{$value['comics_name']}</h3>
+			</li>
+			{/foreach}
+		</ul>
+
+	</section>
+
+</div>
